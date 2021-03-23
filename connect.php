@@ -15,6 +15,13 @@ class database{
  $this->dbConn->query("SET NAMES UTF8");
  }
 
+ public function insertData($info) //เพิ่มข้อมูล
+ {
+     $insertQuery = "INSERT INTO `member`(`name`, `user`, `password`, `type`)  VALUES ('{$info['us_name']}','{$info['username']}',MD5('{$info['us_password']}'),'{$info['us_type']}' )";
+     echo $insertQuery;
+     $rsInsert = $this->dbConn->Query($insertQuery);
+ }
+
 }
 
 ?>
