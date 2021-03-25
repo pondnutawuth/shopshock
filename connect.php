@@ -6,7 +6,7 @@ class database{
  {
  define("host", "localhost");
  define("username", "root");
- define("pass", "");
+ define("pass", "12345678");
  define("database", "shopshock");
  $this->dbConn = new mysqli(host, username, pass, database);
  if ($this->dbConn->connect_error) 
@@ -21,7 +21,28 @@ class database{
      echo $insertQuery;
      $rsInsert = $this->dbConn->Query($insertQuery);
  }
-
+ public function show_information() //แสดงข้อมูลทั้งหมดใน table
+ {
+     $sql = "SELECT * FROM `product`";
+     $result = $this->dbConn->query($sql);
+     echo "<table border='1'>";
+     $counter = 0;
+     while ($row = $result->fetch_assoc()) {
+         if ($counter == 0) {
+             echo "<tr>";
+             foreach ($row as $key => $value) {
+                 echo "<th>{$key}</th>";
+             }
+            $counter++;
+         }
+         echo "<tr>";
+         foreach ($row as $key => $value) {
+             echo "<td>{$value}</td>";
+         }
+         echo "</tr>";
+     }
+     echo "</table>";
+ }
 }
 
 ?>
